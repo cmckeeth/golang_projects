@@ -7,28 +7,16 @@ import (
 	"github.com/gorilla/mux"
 )
 
-func get(w http.ResponseWriter, r *http.Request) {
+func getStatus(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
-	w.Write([]byte(`{"message": "get called"}`))
+	w.Write([]byte(`{"message": "You've made a get request"}`))
 }
 
 func post(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusCreated)
-	w.Write([]byte(`{"message": "post called"}`))
-}
-
-func put(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusAccepted)
-	w.Write([]byte(`{"message": "put called"}`))
-}
-
-func delete(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
-	w.Write([]byte(`{"message": "delete called"}`))
+	w.Write([]byte(`{"message": "You've made a post request"}`))
 }
 
 func notFound(w http.ResponseWriter, r *http.Request) {
@@ -39,10 +27,8 @@ func notFound(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	r := mux.NewRouter()
-	r.HandleFunc("/", get).Methods(http.MethodGet)
+	r.HandleFunc("/", getStatus).Methods(http.MethodGet)
 	r.HandleFunc("/", post).Methods(http.MethodPost)
-	r.HandleFunc("/", put).Methods(http.MethodPut)
-	r.HandleFunc("/", delete).Methods(http.MethodDelete)
 	r.HandleFunc("/", notFound)
 	log.Fatal(http.ListenAndServe(":8080", r))
 }

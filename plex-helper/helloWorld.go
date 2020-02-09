@@ -7,10 +7,8 @@ import (
 	"github.com/gorilla/mux"
 )
 
-func getStatus(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusOK)
-	w.Write([]byte(`{"message": "You've made a get request"}`))
+func getStatus(c *controller, r *http.Request) {
+	c.controllerGet()
 }
 
 func post(w http.ResponseWriter, r *http.Request) {
